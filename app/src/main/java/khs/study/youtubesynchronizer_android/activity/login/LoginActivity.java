@@ -1,7 +1,9 @@
-package khs.study.youtubesynchronizer_android;
+package khs.study.youtubesynchronizer_android.activity.login;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import khs.study.youtubesynchronizer_android.R;
 
 public class LoginActivity extends Activity {
 
