@@ -5,4 +5,6 @@ package khs.study.youtubesynchronizer_android.activity.channel.domain;
  */
 
 public class Channel {
+    private String id;
+    private String message;
 }
