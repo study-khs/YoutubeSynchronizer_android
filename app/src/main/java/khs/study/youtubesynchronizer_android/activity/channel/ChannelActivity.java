@@ -3,8 +3,12 @@ package khs.study.youtubesynchronizer_android.activity.channel;
 import android.app.Activity;
 import android.os.Bundle;
 
+import java.util.List;
+
 import khs.study.youtubesynchronizer_android.R;
+import khs.study.youtubesynchronizer_android.activity.channel.domain.Channel;
 import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelModel;
+import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelModelImpl;
 import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelPresenter;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 
@@ -13,11 +17,16 @@ import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
  */
 
 public class ChannelActivity extends Activity implements ChannelPresenter {
+    ChannelModel channelModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
+
+        channelModel = new ChannelModelImpl();
+        channelModel.setPresenter(this);
+        loadChannels();
     }
 
     @Override
@@ -61,8 +70,8 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     }
 
     @Override
-    public void loadChannelPageDto() {
-
+    public List<Channel> loadChannels() {
+        return channelModel.loadItems();
     }
 
     @Override
@@ -77,6 +86,26 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public void deleteChannel() {
+
+    }
+
+    @Override
+    public void onLoadItemsSuccess(List<Channel> channelList) {
+        // channelList
+    }
+
+    @Override
+    public void onAddItemSuccess() {
+
+    }
+
+    @Override
+    public void onUpdateItemSuccess() {
+
+    }
+
+    @Override
+    public void onDelItemSuccess() {
 
     }
 }
