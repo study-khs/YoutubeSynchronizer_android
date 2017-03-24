@@ -5,16 +5,8 @@ package khs.study.youtubesynchronizer_android.activity.consts;
  */
 
 public class URL {
-    final String url = "http://13.124.12.120:8081/";
-
-    private static final URL ourInstance = new URL();
-
-    static URL getInstance() {
-        return ourInstance;
-    }
-
-    public String getUrl() {
+    public static final String getUrl() {
+        final String url = "http://13.124.12.120:8081/";
         return url;
     }
-
 }
