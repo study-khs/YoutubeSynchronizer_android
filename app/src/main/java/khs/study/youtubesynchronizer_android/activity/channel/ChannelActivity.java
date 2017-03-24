@@ -2,6 +2,7 @@ package khs.study.youtubesynchronizer_android.activity.channel;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.List;
 
@@ -24,14 +25,14 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
 
-        channelModel = new ChannelModelImpl();
+        setModel(new ChannelModelImpl());
         channelModel.setPresenter(this);
         loadChannels();
     }
 
     @Override
     public void attachView(ChannelView channelView) {
-
+        // todo attach ViewGroup
     }
 
     @Override
@@ -41,12 +42,12 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public void setModel(ChannelModel channelModel) {
-
+        this.channelModel = channelModel;
     }
 
     @Override
     public void fromViewListener() {
-
+        //todo Refresh Button Click -> loadChannels
     }
 
     @Override
@@ -71,6 +72,7 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public List<Channel> loadChannels() {
+        Log.d("JYP/Model", "loadChannels");
         return channelModel.loadItems();
     }
 
@@ -92,6 +94,8 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     @Override
     public void onLoadItemsSuccess(List<Channel> channelList) {
         // channelList
+        Log.d("JYP/Presenter", "onLoadItemsSuccess");
+        // todo updateView
     }
 
     @Override

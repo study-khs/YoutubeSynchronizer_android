@@ -33,21 +33,23 @@ public class ChannelModelImpl implements ChannelModel {
 
     @Override
     public List<Channel> loadItems() {
+        Log.d("JYP/Service", "loadItems");
+
         Call<ChannelPageDto<Channel>> call = mChannelService.getMessageList();
         call.enqueue(new Callback<ChannelPageDto<Channel>>() {
             @Override
             public void onResponse(Call<ChannelPageDto<Channel>> call, Response<ChannelPageDto<Channel>> response) {
                 if (response.isSuccessful()) {
                     mChannelDto = response.body();
-                    Log.d("JYP", mChannelDto.getContent().toString());
+                    Log.d("JYP/Service", mChannelDto.getContent().toString());
                 } else {
-                    Log.d("JYP", "Unexpected response");
+                    Log.d("JYP/Service", "Unexpected response");
                 }
             }
 
             @Override
             public void onFailure(Call<ChannelPageDto<Channel>> call, Throwable t) {
-                Log.d("JYP", "Failure");
+                Log.d("JYP/Service", "Failure");
             }
         });
 
@@ -76,6 +78,7 @@ public class ChannelModelImpl implements ChannelModel {
 
     @Override
     public void onLoadItemsSuccess() {
+        Log.d("JYP/Service", "onLoadItemsSuccess");
         mChannelPresenter.onLoadItemsSuccess(mChannelList);
     }
 
