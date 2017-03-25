@@ -3,7 +3,7 @@ package khs.study.youtubesynchronizer_android.activity.channel.presenter;
 import java.util.List;
 
 import khs.study.youtubesynchronizer_android.activity.channel.domain.Channel;
-import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelModel;
+import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelService;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 
 /**
@@ -13,21 +13,41 @@ import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 public interface ChannelPresenter {
     void attachView(ChannelView channelView);
     void detachView(ChannelView channelView);
-    void setModel(ChannelModel channelModel);
-    void fromViewListener();
+    void setService(ChannelService channelService);
 
+    // ------------------------------------- ViewCommander -------------------------------
     void goToChannelDetailActivity();
+
     void showNewChannelDialog();
+
     void showChannelDetailDialog();
-    void reDrawView();
 
-    List<Channel> loadChannels();
-    void postChannel();
-    void putChannel();
-    void deleteChannel();
+    void updateList(List<Channel> channelList);
 
-    void onLoadItemsSuccess(List<Channel> channelList);
-    void onAddItemSuccess();
-    void onUpdateItemSuccess();
-    void onDelItemSuccess();
+    // ------------------------------------- ViewListener -------------------------------
+
+    void onGoToChannelDetailButtonClick();
+    void onNewChannelDialogButtonClick();
+    void onChannelDetailDialog();
+    void onUpdateListButtonClick();
+
+    // ------------------------------------- ModelCommander -------------------------------
+
+    void loadChannelList();
+
+    void newChannel(Channel channel);
+
+    void updateChannel(Channel channel);
+
+    void deleteChannel(Channel channel);
+
+    // ------------------------------------- ModelListener -------------------------------
+
+    void onLoadChannelListSuccess(List<Channel> channelList);
+
+    void onNewChannelSuccess();
+
+    void onUpdateChannelSuccess();
+
+    void onDeleteChannelSuccess();
 }

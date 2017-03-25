@@ -1,32 +1,35 @@
 package khs.study.youtubesynchronizer_android.activity.channel.model;
 
+import java.util.List;
+
 import khs.study.youtubesynchronizer_android.activity.channel.domain.Channel;
-import khs.study.youtubesynchronizer_android.activity.channel.domain.ChannelPageDto;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelPresenter;
 
 /**
  * Created by jaeyoung on 2017. 3. 24..
  */
 
 public interface ChannelService {
-    @GET("api/message/{message_id}")
-    Call<Channel> getChannel(@Path("message_id") String id);
+    void setPresenter(ChannelPresenter channelPresenter);
 
-    @GET("api/message")
-    Call<ChannelPageDto<Channel>> getMessageList();
+    // ------------------------------------- PresenterListener -------------------------------
 
-    @POST("api/message")
-    Call<Channel> postChannel(@Body Channel channel);
+    void loadChannelList();
 
-    @PUT("api/message")
-    Call<Channel> putChannel(@Body Channel channel);
+    void newChannel(Channel channel);
 
-    @DELETE("api/message/{message_id}")
-    Call<Void> deleteChannel(@Path("message_id") String id);
+    void updateChannel(Channel channel);
+
+    void deleteChannel(Channel channel);
+
+
+    // ------------------------------------- PresenterCommander -------------------------------
+
+    void onLoadChannelListSuccess(List<Channel> channelList);
+
+    void onNewChannelSuccess();
+
+    void onUpdateChannelSuccess();
+
+    void onDeleteChannelSuccess();
 }

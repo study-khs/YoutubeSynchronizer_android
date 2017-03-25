@@ -8,8 +8,8 @@ import java.util.List;
 
 import khs.study.youtubesynchronizer_android.R;
 import khs.study.youtubesynchronizer_android.activity.channel.domain.Channel;
-import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelModel;
-import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelModelImpl;
+import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelService;
+import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelServiceImpl;
 import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelPresenter;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 
@@ -18,16 +18,18 @@ import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
  */
 
 public class ChannelActivity extends Activity implements ChannelPresenter {
-    ChannelModel channelModel;
+
+    ChannelService mChannelService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel);
 
-        setModel(new ChannelModelImpl());
-        channelModel.setPresenter(this);
-        loadChannels();
+        setService(new ChannelServiceImpl());
+        mChannelService.setPresenter(this);
+
+        loadChannelList();
     }
 
     @Override
@@ -41,14 +43,57 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     }
 
     @Override
-    public void setModel(ChannelModel channelModel) {
-        this.channelModel = channelModel;
+    public void setService(ChannelService channelService) {
+        mChannelService = channelService;
+    }
+
+    // ------------------------------------- ModelCommander -------------------------------
+
+    @Override
+    public void loadChannelList() {
+        Log.d("JYP/Presenter", "loadChannels");
+        mChannelService.loadChannelList();
     }
 
     @Override
-    public void fromViewListener() {
-        //todo Refresh Button Click -> loadChannels
+    public void newChannel(Channel channel) {
+
     }
+
+    @Override
+    public void updateChannel(Channel channel) {
+
+    }
+
+    @Override
+    public void deleteChannel(Channel channel) {
+
+    }
+
+    // ------------------------------------- ModelListener -------------------------------
+
+    @Override
+    public void onLoadChannelListSuccess(List<Channel> channelList) {
+        Log.d("JYP/Presenter", "onLoadItemsSuccess");
+        updateList(channelList);
+    }
+
+    @Override
+    public void onNewChannelSuccess() {
+
+    }
+
+    @Override
+    public void onUpdateChannelSuccess() {
+
+    }
+
+    @Override
+    public void onDeleteChannelSuccess() {
+
+    }
+
+    // ------------------------------------- ViewCommander -------------------------------
 
     @Override
     public void goToChannelDetailActivity() {
@@ -66,50 +111,30 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     }
 
     @Override
-    public void reDrawView() {
+    public void updateList(List<Channel> channelList) {
+
+    }
+
+    // ------------------------------------- ViewListener -------------------------------
+
+
+    @Override
+    public void onGoToChannelDetailButtonClick() {
 
     }
 
     @Override
-    public List<Channel> loadChannels() {
-        Log.d("JYP/Model", "loadChannels");
-        return channelModel.loadItems();
-    }
-
-    @Override
-    public void postChannel() {
+    public void onNewChannelDialogButtonClick() {
 
     }
 
     @Override
-    public void putChannel() {
+    public void onChannelDetailDialog() {
 
     }
 
     @Override
-    public void deleteChannel() {
-
-    }
-
-    @Override
-    public void onLoadItemsSuccess(List<Channel> channelList) {
-        // channelList
-        Log.d("JYP/Presenter", "onLoadItemsSuccess");
-        // todo updateView
-    }
-
-    @Override
-    public void onAddItemSuccess() {
-
-    }
-
-    @Override
-    public void onUpdateItemSuccess() {
-
-    }
-
-    @Override
-    public void onDelItemSuccess() {
-
+    public void onUpdateListButtonClick() {
+        loadChannelList();
     }
 }

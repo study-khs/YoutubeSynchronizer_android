@@ -16,26 +16,33 @@ import retrofit2.Response;
  * Created by jaeyoung on 2017. 3. 24..
  */
 
-public class ChannelModelImpl implements ChannelModel {
+public class ChannelServiceImpl implements ChannelService {
     ChannelPresenter mChannelPresenter;
 
-    ChannelService mChannelService;
-    RestClient<ChannelService> mRestClient;
+    ChannelDao mChannelDao;
+    RestClient<ChannelDao> mRestClient;
 
     Channel mChannel;
     ChannelPageDto<Channel> mChannelDto;
     List<Channel> mChannelList;
 
-    public ChannelModelImpl() {
-        mRestClient = new RestClient<ChannelService>();
-        mChannelService = mRestClient.getClient(ChannelService.class);
+    public ChannelServiceImpl() {
+        mRestClient = new RestClient<ChannelDao>();
+        mChannelDao = mRestClient.getClient(ChannelDao.class);
     }
 
     @Override
-    public List<Channel> loadItems() {
+    public void setPresenter(ChannelPresenter channelPresenter) {
+        mChannelPresenter = channelPresenter;
+    }
+
+    // ------------------------------------- PresenterListener -------------------------------
+
+    @Override
+    public void loadChannelList() {
         Log.d("JYP/Service", "loadItems");
 
-        Call<ChannelPageDto<Channel>> call = mChannelService.getMessageList();
+        Call<ChannelPageDto<Channel>> call = mChannelDao.getMessageList();
         call.enqueue(new Callback<ChannelPageDto<Channel>>() {
             @Override
             public void onResponse(Call<ChannelPageDto<Channel>> call, Response<ChannelPageDto<Channel>> response) {
@@ -52,48 +59,42 @@ public class ChannelModelImpl implements ChannelModel {
                 Log.d("JYP/Service", "Failure");
             }
         });
-
-        return null;
     }
-
     @Override
-    public void addItem(Channel channel) {
-
-    }
-
-    @Override
-    public void updateItem(Channel channel) {
+    public void newChannel(Channel channel) {
 
     }
 
     @Override
-    public void delItem(Channel channel) {
+    public void updateChannel(Channel channel) {
 
     }
 
     @Override
-    public void setPresenter(ChannelPresenter channelPresenter) {
-        mChannelPresenter = channelPresenter;
-    }
-
-    @Override
-    public void onLoadItemsSuccess() {
-        Log.d("JYP/Service", "onLoadItemsSuccess");
-        mChannelPresenter.onLoadItemsSuccess(mChannelList);
-    }
-
-    @Override
-    public void onAddItemSuccess() {
+    public void deleteChannel(Channel channel) {
 
     }
 
+    // ------------------------------------- PresenterCommander -------------------------------
+
     @Override
-    public void onUpdateItemSuccess() {
+    public void onLoadChannelListSuccess(List<Channel> channelList) {
+        Log.d("JYP/Service", "onLoadChannelListSuccess");
+        mChannelPresenter.onLoadChannelListSuccess(channelList);
+    }
+
+    @Override
+    public void onNewChannelSuccess() {
 
     }
 
     @Override
-    public void onDelItemSuccess() {
+    public void onUpdateChannelSuccess() {
+
+    }
+
+    @Override
+    public void onDeleteChannelSuccess() {
 
     }
 }
