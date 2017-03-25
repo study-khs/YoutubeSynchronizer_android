@@ -2,6 +2,7 @@ package khs.study.youtubesynchronizer_android.activity.channel.view;
 
 import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -22,7 +23,7 @@ public class ChannelViewImpl implements ChannelView {
     ChannelPresenter channelPresenter;
     Activity mActivity;
 
-    ToggleButton mBtnGoToChannelDetailActivity;
+    Button mBtnGoToChannelDetailActivity;
 
     //todo singleton
 
@@ -31,13 +32,20 @@ public class ChannelViewImpl implements ChannelView {
         mActivity = activity;
         Log.d("JYP/ChannelView", "SetActivity");
 
-        mBtnGoToChannelDetailActivity = (ToggleButton) mActivity.findViewById(R.id.toggleButton);
-        mBtnGoToChannelDetailActivity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mBtnGoToChannelDetailActivity = (Button) mActivity.findViewById(R.id.button);
+        mBtnGoToChannelDetailActivity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Toast.makeText(mActivity, "토글 "+isChecked, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                onUpdateListButtonClick();
             }
         });
+//        mBtnGoToChannelDetailActivity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                //Toast.makeText(mActivity, "토글 "+isChecked, Toast.LENGTH_SHORT).show();
+//                onUpdateListButtonClick();
+//            }
+//        });
 
         Log.d("JYP/ChannelView", "SetOnClickListener");
     }
@@ -67,7 +75,8 @@ public class ChannelViewImpl implements ChannelView {
 
     @Override
     public void updateList(List<Channel> channelList) {
-        //todo
+        Log.d("JYP/View", "updateList");
+        //todo 화면 만들기(리스트)
     }
 
     // ------------------------------------- PresenterCommander -------------------------------
@@ -91,5 +100,6 @@ public class ChannelViewImpl implements ChannelView {
     @Override
     public void onUpdateListButtonClick() {
         channelPresenter.onUpdateListButtonClick();
+        Log.d("JYP/ChannelView", "onUpdateListButtonClick");
     }
 }

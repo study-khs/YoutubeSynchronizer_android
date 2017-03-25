@@ -48,7 +48,8 @@ public class ChannelServiceImpl implements ChannelService {
             public void onResponse(Call<ChannelPageDto<Channel>> call, Response<ChannelPageDto<Channel>> response) {
                 if (response.isSuccessful()) {
                     mChannelDto = response.body();
-                    Log.d("JYP/Service", mChannelDto.getContent().toString());
+                    onLoadChannelListSuccess(mChannelDto.getContent());
+                    Log.d("JYP/Service", "Response is Successful");
                 } else {
                     Log.d("JYP/Service", "Unexpected response");
                 }

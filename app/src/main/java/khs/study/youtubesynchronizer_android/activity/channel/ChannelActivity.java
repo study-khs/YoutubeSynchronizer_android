@@ -3,6 +3,8 @@ package khs.study.youtubesynchronizer_android.activity.channel;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -23,6 +25,10 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     ChannelService mChannelService;
     ChannelView mChannelView;
 
+    List<Channel> mChannelList;
+
+    Button mViewTestBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +41,15 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
         Log.d("JYP/Presenter", "SetPresenterOnView");
 
         loadChannelList();
+
+        // View test code
+        mViewTestBtn = (Button) findViewById(R.id.button);
+        mViewTestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mChannelView.updateList(mChannelList);
+            }
+        });
     }
 
     @Override
@@ -81,7 +96,8 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
     @Override
     public void onLoadChannelListSuccess(List<Channel> channelList) {
         Log.d("JYP/Presenter", "onLoadItemsSuccess");
-        updateList(channelList);
+        mChannelList = channelList;
+        //updateList(channelList);
     }
 
     @Override
