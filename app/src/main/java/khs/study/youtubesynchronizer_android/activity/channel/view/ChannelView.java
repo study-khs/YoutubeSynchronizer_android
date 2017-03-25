@@ -1,5 +1,7 @@
 package khs.study.youtubesynchronizer_android.activity.channel.view;
 
+import android.app.Activity;
+
 import java.util.List;
 
 import khs.study.youtubesynchronizer_android.activity.channel.domain.Channel;
@@ -11,6 +13,7 @@ import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelP
 
 public interface ChannelView {
 
+    void setActivity(Activity activity);
     void setPresenter(ChannelPresenter channelPresenter);
 
     // ------------------------------------- PresenterListener -------------------------------

@@ -12,6 +12,7 @@ import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelServi
 import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelServiceImpl;
 import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelPresenter;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
+import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelViewImpl;
 
 /**
  * Created by jaeyoung on 2017. 3. 24..
@@ -20,6 +21,7 @@ import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 public class ChannelActivity extends Activity implements ChannelPresenter {
 
     ChannelService mChannelService;
+    ChannelView mChannelView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,18 +30,22 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
         setService(new ChannelServiceImpl());
         mChannelService.setPresenter(this);
+        attachView(new ChannelViewImpl());
+        mChannelView.setPresenter(this);
+        Log.d("JYP/Presenter", "SetPresenterOnView");
 
         loadChannelList();
     }
 
     @Override
     public void attachView(ChannelView channelView) {
-        // todo attach ViewGroup
+        mChannelView = channelView;
+        Log.d("JYP/Presenter", "attachView");
     }
 
     @Override
-    public void detachView(ChannelView channelView) {
-
+    public void detachView() {
+        mChannelView = null;
     }
 
     @Override
@@ -51,8 +57,8 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public void loadChannelList() {
-        Log.d("JYP/Presenter", "loadChannels");
         mChannelService.loadChannelList();
+        Log.d("JYP/Presenter", "loadChannels");
     }
 
     @Override

@@ -12,7 +12,7 @@ import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 
 public interface ChannelPresenter {
     void attachView(ChannelView channelView);
-    void detachView(ChannelView channelView);
+    void detachView();
     void setService(ChannelService channelService);
 
     // ------------------------------------- ViewCommander -------------------------------
