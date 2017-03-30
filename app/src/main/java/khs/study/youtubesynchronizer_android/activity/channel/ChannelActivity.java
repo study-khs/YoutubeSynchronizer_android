@@ -1,6 +1,7 @@
 package khs.study.youtubesynchronizer_android.activity.channel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import khs.study.youtubesynchronizer_android.activity.channel.model.ChannelServi
 import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelPresenter;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelView;
 import khs.study.youtubesynchronizer_android.activity.channel.view.ChannelViewImpl;
+import khs.study.youtubesynchronizer_android.activity.channel_detail.ChannelDetailActivity;
 
 /**
  * Created by jaeyoung on 2017. 3. 24..
@@ -43,7 +45,7 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
         loadChannelList();
 
         // View test code
-        mViewTestBtn = (Button) findViewById(R.id.button);
+        mViewTestBtn = (Button) findViewById(R.id.testBtn);
         mViewTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +121,7 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public void goToChannelDetailActivity() {
-
+        startActivity(new Intent(this.getApplicationContext(), ChannelDetailActivity.class));
     }
 
     @Override
@@ -142,7 +144,7 @@ public class ChannelActivity extends Activity implements ChannelPresenter {
 
     @Override
     public void onGoToChannelDetailButtonClick() {
-
+        goToChannelDetailActivity();
     }
 
     @Override

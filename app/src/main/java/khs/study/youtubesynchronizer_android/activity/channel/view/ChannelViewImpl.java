@@ -20,10 +20,10 @@ import khs.study.youtubesynchronizer_android.activity.channel.presenter.ChannelP
  */
 
 public class ChannelViewImpl implements ChannelView {
-    ChannelPresenter channelPresenter;
+    ChannelPresenter mPresenter;
     Activity mActivity;
 
-    Button mBtnGoToChannelDetailActivity;
+    Button mGoToChannelDetailActivityBtn;
 
     //todo singleton
 
@@ -32,11 +32,12 @@ public class ChannelViewImpl implements ChannelView {
         mActivity = activity;
         Log.d("JYP/ChannelView", "SetActivity");
 
-        mBtnGoToChannelDetailActivity = (Button) mActivity.findViewById(R.id.button);
-        mBtnGoToChannelDetailActivity.setOnClickListener(new View.OnClickListener() {
+        mGoToChannelDetailActivityBtn =
+                (Button) mActivity.findViewById(R.id.goToChannelDetailActivityBtn);
+        mGoToChannelDetailActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onUpdateListButtonClick();
+                onGoToChannelDetailButtonClick();
             }
         });
 //        mBtnGoToChannelDetailActivity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -53,7 +54,7 @@ public class ChannelViewImpl implements ChannelView {
 
     @Override
     public void setPresenter(ChannelPresenter channelPresenter) {
-        this.channelPresenter = channelPresenter;
+        this.mPresenter = channelPresenter;
         setActivity((Activity)channelPresenter);
     }
     // ------------------------------------- PresenterListener -------------------------------
@@ -84,22 +85,22 @@ public class ChannelViewImpl implements ChannelView {
 
     @Override
     public void onGoToChannelDetailButtonClick() {
-        channelPresenter.onGoToChannelDetailButtonClick();
+        mPresenter.onGoToChannelDetailButtonClick();
     }
 
     @Override
     public void onNewChannelDialogButtonClick() {
-        channelPresenter.onNewChannelDialogButtonClick();
+        mPresenter.onNewChannelDialogButtonClick();
     }
 
     @Override
     public void onChannelDetailDialog() {
-        channelPresenter.onChannelDetailDialog();
+        mPresenter.onChannelDetailDialog();
     }
 
     @Override
     public void onUpdateListButtonClick() {
-        channelPresenter.onUpdateListButtonClick();
+        mPresenter.onUpdateListButtonClick();
         Log.d("JYP/ChannelView", "onUpdateListButtonClick");
     }
 }

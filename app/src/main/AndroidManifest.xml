@@ -19,6 +19,8 @@
 
         <activity android:name=".activity.channel.ChannelActivity">
         </activity>
+        <activity android:name=".activity.channel_detail.ChannelDetailActivity">
+        </activity>
     </application>
 
 </manifest>

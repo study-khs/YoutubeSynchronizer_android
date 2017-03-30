@@ -1,6 +1,7 @@
 package khs.study.youtubesynchronizer_android.activity.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,29 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import khs.study.youtubesynchronizer_android.R;
+import khs.study.youtubesynchronizer_android.activity.channel.ChannelActivity;
 import khs.study.youtubesynchronizer_android.activity.login.domain.Account;
+import khs.study.youtubesynchronizer_android.activity.login.presenter.LoginPresenter;
 import khs.study.youtubesynchronizer_android.activity.login.view.LoginView;
 import khs.study.youtubesynchronizer_android.activity.login.view.LoginViewImpl;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements LoginPresenter {
     private final String TAG = "JYP/"+getClass().getSimpleName();
     LoginView mLoginView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         setView(new LoginViewImpl());
+        mLoginView.setActivity(this);
+        mLoginView.setPresenter(this);
+
         // test showAccountList
         mLoginView.showAccountList(makeAccountSample()); // todo remove
-        Log.d(TAG, "onCreate: ");
     }
 
     void setView(LoginView loginView){
-        mLoginView = loginView;
-        mLoginView.setActivity(this);
         Log.d(TAG, "setView: ");
+        mLoginView = loginView;
     }
 
     // For test
@@ -50,5 +55,11 @@ public class LoginActivity extends Activity {
         accountList.add(account6);
 
         return accountList;
+    }
+
+    @Override
+    public void onLoginBtnClick() {
+        Log.d(TAG, "onLoginBtnClick: start ChannelActivity");
+        startActivity(new Intent(this.getApplicationContext(), ChannelActivity.class));
     }
 }

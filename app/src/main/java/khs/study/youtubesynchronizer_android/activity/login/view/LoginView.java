@@ -12,4 +12,8 @@ import khs.study.youtubesynchronizer_android.activity.login.presenter.LoginPrese
 
 public interface LoginView extends BaseView<LoginPresenter> {
     void showAccountList(List<Account> accountList);
+
+    interface onClickListener {
+        void onLoginBtnClick();
+    }
 }

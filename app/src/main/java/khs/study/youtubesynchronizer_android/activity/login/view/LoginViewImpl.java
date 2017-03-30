@@ -3,6 +3,8 @@ package khs.study.youtubesynchronizer_android.activity.login.view;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class LoginViewImpl implements LoginView {
 
     RecyclerView mRecyclerView;
     LoginAdapter mLoginAdapter;
+    Button mEnterChnBtn;
 
     @Override
     public void setActivity(Activity activity) {
@@ -32,8 +35,16 @@ public class LoginViewImpl implements LoginView {
     }
 
     void initView(){
-        mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.recycler_view);
         Log.d(TAG, "initView: ");
+        mEnterChnBtn = (Button) mActivity.findViewById(R.id.loginBtn);
+        mEnterChnBtn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                mPresenter.onLoginBtnClick();
+                                            }
+                                        }
+                                    );
+        mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.recycler_view);
     }
 
     @Override
