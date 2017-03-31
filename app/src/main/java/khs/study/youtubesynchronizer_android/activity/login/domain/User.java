@@ -4,11 +4,11 @@ package khs.study.youtubesynchronizer_android.activity.login.domain;
  * Created by jaeyoung on 2017. 3. 25..
  */
 
-public class Account {
+public class User {
     String id;
     String type;
 
-    public Account(String id, String type) {
+    public User(String id, String type) {
         this.id = id;
         this.type = type;
     }

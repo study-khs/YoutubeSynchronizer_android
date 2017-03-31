@@ -9,7 +9,7 @@ import android.widget.Button;
 import java.util.List;
 
 import khs.study.youtubesynchronizer_android.R;
-import khs.study.youtubesynchronizer_android.activity.login.domain.Account;
+import khs.study.youtubesynchronizer_android.activity.login.domain.User;
 import khs.study.youtubesynchronizer_android.activity.login.presenter.LoginPresenter;
 import khs.study.youtubesynchronizer_android.activity.login.view.recyclerview.adapter.LoginAdapter;
 
@@ -45,6 +45,7 @@ public class LoginViewImpl implements LoginView {
                                         }
                                     );
         mRecyclerView = (RecyclerView) mActivity.findViewById(R.id.recycler_view);
+
     }
 
     @Override
@@ -54,8 +55,8 @@ public class LoginViewImpl implements LoginView {
     }
 
     @Override
-    public void showAccountList(List<Account> accountList) {
-        mLoginAdapter = new LoginAdapter(accountList);
+    public void showAccountList(List<User> userList) {
+        mLoginAdapter = new LoginAdapter(userList);
         mRecyclerView.setAdapter(mLoginAdapter);
         Log.d(TAG, "showAccountList: ");
     }
