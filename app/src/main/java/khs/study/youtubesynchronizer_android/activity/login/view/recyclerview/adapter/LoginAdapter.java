@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import khs.study.youtubesynchronizer_android.R;
-import khs.study.youtubesynchronizer_android.activity.login.domain.Account;
+import khs.study.youtubesynchronizer_android.activity.login.domain.User;
 import khs.study.youtubesynchronizer_android.activity.login.view.recyclerview.LoginViewHolder;
 
 /**
@@ -16,10 +16,10 @@ import khs.study.youtubesynchronizer_android.activity.login.view.recyclerview.Lo
  */
 
 public class LoginAdapter extends RecyclerView.Adapter<LoginViewHolder> {
-    List<Account> mAccountList;
+    List<User> mUserList;
 
-    public LoginAdapter(List<Account> accountList) {
-        mAccountList = accountList;
+    public LoginAdapter(List<User> userList) {
+        mUserList = userList;
     }
 
     @Override
@@ -32,13 +32,13 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginViewHolder> {
 
     @Override
     public void onBindViewHolder(LoginViewHolder holder, int position) {
-        Account account = mAccountList.get(position);
-        holder.tvId.setText(account.getId());
-        holder.tvType.setText(account.getType());
+        User user = mUserList.get(position);
+        holder.tvId.setText(user.getId());
+        holder.tvType.setText(user.getType());
     }
 
     @Override
     public int getItemCount() {
-        return mAccountList.size();
+        return mUserList.size();
     }
 }

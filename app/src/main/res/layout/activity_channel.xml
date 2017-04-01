@@ -18,7 +18,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="button"
-        android:id="@+id/button" />
+        android:text="Test Btn"
+        android:id="@+id/testBtn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter channel"
+        android:id="@+id/goToChannelDetailActivityBtn" />
 
 </LinearLayout>

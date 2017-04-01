@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YoutubeSynchronizer-android</string>
+    <string name="facebook_app_id">798750976991817</string>
 </resources>
